@@ -1,3 +1,7 @@
 include head
-body
-
+  body
+    include header/header
+    each val, index in goods
+      p #{index} #{val.name}
+      img(src=`images/${val.image}`)
+      p #{val.description}

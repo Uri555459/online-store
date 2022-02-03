@@ -67,7 +67,10 @@ app.get('/category', (req, res) => {
 
   Promise.all([category, goods])
     .then(value => {
-      res.render('category', {})
+      res.render('category', {
+        category: JSON.parse(JSON.stringify(value[0])),
+        goods: JSON.parse(JSON.stringify(value[1]))
+      })
     })
 
 })
