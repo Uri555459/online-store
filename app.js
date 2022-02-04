@@ -26,8 +26,8 @@ app.listen(PORT, () => {
   console.log(`Server started. Port: ${PORT}`)
 })
 
-app.get('/', async (req, res) => {
-  await dbOptions.query(
+app.get('/', (req, res) => {
+  dbOptions.query(
     'SELECT * FROM goods',
     (error, result) => {
       if (error) throw error
@@ -35,7 +35,10 @@ app.get('/', async (req, res) => {
       for (let i = 0; i < result.length; i++) {
         goods[result[i]['id']] = result[i]
       }
-      res.render('main', {goods: JSON.parse(JSON.stringify(goods))})
+      res.render('main',
+        {
+          goods: JSON.parse(JSON.stringify(goods))
+        })
     }
   )
 })
@@ -73,4 +76,15 @@ app.get('/category', (req, res) => {
       })
     })
 
+})
+
+app.get('/goods', (req, res) => {
+  const goodId = req.query.id
+  dbOptions.query(`SELECT *
+                   FROM goods
+                   WHERE id = ${goodId}`,
+    (error, result, fields) => {
+      if (error) throw error
+      res.render('goods', {goods: JSON.parse(JSON.stringify(result))})
+    })
 })
