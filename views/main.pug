@@ -1,7 +1,9 @@
 include head
 body
   include header/header.pug
-  each val, index in goods
-    p #{index} #{val.name}
-    img(src=`images/${val.image}`)
-    p #{val.description}
+  .container
+    .row
+      each val, index in goods
+        include card/card
+    include navigation/navigation
+  include footer/footer

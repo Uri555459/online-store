@@ -20,6 +20,8 @@ const dbOptions = mysql.createPool({
   database: 'shop'
 })
 
+// Настройка модуля
+app.use(express.json())
 
 // Запуск сервера
 app.listen(PORT, () => {
@@ -87,4 +89,33 @@ app.get('/goods', (req, res) => {
       if (error) throw error
       res.render('goods', {goods: JSON.parse(JSON.stringify(result))})
     })
+})
+
+app.post('/get-category-list', (req, res) => {
+  const goodId = req.query.id
+  dbOptions.query(`SELECT id, category
+                   FROM category`,
+    (error, result, fields) => {
+      if (error) throw error
+      res.json(result)
+    })
+})
+
+app.post('/get-goods-info', (req, res) => {
+  const reqBodyKey = req.body.key
+  if (req.body.key.length != 0){
+  dbOptions.query(`SELECT id, name, cost
+                   FROM goods
+                   WHERE id IN (${reqBodyKey.join(',')})`,
+    (error, result, fields) => {
+      if (error) throw error
+      const goods = {}
+      for (let i = 0; i < result.length; i++) {
+        goods[result[i]['id']] = result[i]
+      }
+      res.json(goods)
+    })
+  } else {
+    res.send('0')
+  }
 })

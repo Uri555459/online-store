@@ -3,11 +3,19 @@
     box-sizing: border-box;
 }
 
+body {
+    min-width: 320px;
+}
+
 .wrap {
+    width: 100%;
+    max-width: 1920px;
     background: #fff;
     display: flex;
     flex-direction: column;
     height: 100%;
+    margin: 0 auto;
+    overflow-x: hidden;
 }
 
 .content {
@@ -33,7 +41,7 @@
     margin: 0 auto;
     padding: 0;
 }
-
+/*=========== Card ===============*/
 .card {
     height: 100%;
     border: 1px solid #dedede;
@@ -51,3 +59,81 @@
     max-width: 90%;
     min-height: 150px;
 }
+
+/*=========== Navigation ===============*/
+.site-nav {
+    width: 300px;
+    min-height: 100vh;
+    position: fixed;
+    /*left: -300px;*/
+    top: 0;
+    z-index: 99999;
+    padding: 10px;
+    transition: all ease 1s;
+    color: #fff;
+}
+
+.close-button-div {
+    text-align: right;
+}
+
+ul.category-list {
+    padding-left: 15px;
+}
+
+ul.category-list li {
+    list-style: disc;
+}
+ul.category-list a {
+    color: #424242;
+}
+
+.show-nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    border: none;
+    width: 30px;
+    height: 20px;
+}
+
+.show-nav span {
+    width: 30px;
+    height: 1px;
+    background-color: #fff;
+}
+
+.site-nav a {
+    color: #424242;
+}
+
+/*================= Cart ===================*/
+
+.cart-minus,
+.cart-plus {
+    width: 20px;
+    height: 20px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
