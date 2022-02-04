@@ -29,20 +29,27 @@ app.listen(PORT, () => {
 })
 
 app.get('/', (req, res) => {
-  dbOptions.query(
-    'SELECT * FROM goods',
-    (error, result) => {
-      if (error) throw error
-      const goods = {}
-      for (let i = 0; i < result.length; i++) {
-        goods[result[i]['id']] = result[i]
-      }
-      res.render('main',
-        {
-          goods: JSON.parse(JSON.stringify(goods))
-        })
-    }
-  )
+  const categoryGoods = new Promise((resolve, reject) => {
+    dbOptions.query(config.get('homeGoodsUrl'), (error, result, fields) => {
+      if (error) return reject(error)
+      resolve(result)
+    })
+  })
+
+  const categoryDescription = new Promise((resolve, reject) => {
+    dbOptions.query('SELECT * FROM category', (error, result, fields) => {
+      if (error) return reject(error)
+      resolve(result)
+    })
+  })
+
+  Promise.all([categoryGoods, categoryDescription])
+    .then(value => {
+      res.render('index', {
+        goods: JSON.parse(JSON.stringify(value[0])),
+        category: JSON.parse(JSON.stringify(value[1]))
+      })
+    })
 })
 
 app.get('/category', (req, res) => {

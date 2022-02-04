@@ -1,3 +1,4 @@
 {
-  "port": "3000"
+  "port": "3000",
+  "homeGoodsUrl": "select id,name, cost, image, category from (select id,name,cost,image,category, if(if(@curr_category != category, @curr_category := category, '') != '', @k := 0, @k := @k + 1) as ind   from goods, ( select @curr_category := '' ) v ) goods where ind < 3"
 }
