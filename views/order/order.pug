@@ -1,0 +1,55 @@
+include ../head
+
+.wrap
+  .content
+    include ../order-header/order-header
+
+    .container
+      .row
+        .col.col-md-12
+          h3.cart-header Cart
+          #cart-nav
+        .col.col-md-12
+          h3 Create order
+        .col.col-md-6
+          form#lite-shop-order(action="")
+                  .form-control
+                    label(for='username') Name
+                    input(
+                        type='text',
+                        id='username',
+                        placeholder='Enter your name',
+                        )
+                  .form-control
+                    label(for='phone') Phone
+                    input(
+                        type='text',
+                        id='phone',
+                        placeholder='+380505555555',
+                        )
+                  .form-control
+                    label(for='email') Email
+                    input(
+                        type='text',
+                        id='email',
+                        placeholder='mail@example.com',
+                        )
+                  .form-control
+                    label(for='address') Address
+                    textarea(
+                        id='address',
+                        placeholder='where are you',
+                        )
+                  .form-control
+                    label(for='rule')
+                      input(
+                          type='checkbox',
+                          id='rule',
+                          value='1'
+                          )
+                      span  Terms and Conditions
+                  .form-control.text-right
+                    button(class='button-primary', type='submit') Finish order
+
+    //include ../navigation/navigation
+    include ../footer/footer

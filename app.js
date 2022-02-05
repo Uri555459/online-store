@@ -98,6 +98,10 @@ app.get('/goods', (req, res) => {
     })
 })
 
+app.get('/order', (req, res) => {
+res.render('order/order')
+})
+
 app.post('/get-category-list', (req, res) => {
   const goodId = req.query.id
   dbOptions.query(`SELECT id, category

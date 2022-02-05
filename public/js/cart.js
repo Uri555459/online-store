@@ -45,7 +45,7 @@ const showCart = data => {
     <td><span class="cart-plus" data-id="${key}">+</span></td>
     <td>${formatPrice(data[key]['cost'] * cart[key])} uah</td>
     </tr>`
-    total = cart[key] * data[key]['cost']
+    total += cart[key] * data[key]['cost']
   }
   out += `<tr><td colspan="3">Total: </td><td>${formatPrice(total)} uah</td></tr>`
   out += '</tbody></table>'
